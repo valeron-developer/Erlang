@@ -3,6 +3,16 @@
 -module(p07).
 -export([flatten/1]).
 
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+flatten_test_() ->
+[?_assert(flatten([1,[],[2],[3,4],5]) == [1,2,3,4,5]),
+?_assert(flatten([a,[],[b],[c,d],e]) == [a,b,c,d,e]),
+?_assertNot(flatten([a,[b],[c,1]]) == [a,[b],[c,1]]),
+?_assertMatch([8,d,2,8], flatten([8,[d],2,[],8])),
+?_assertEqual(flatten([[a],[b],[c],[d]]), flatten([[a,b],[c,d]]))].
+-endif.
 
 % если в списке есть элемент - пустой список в голове, то его исключаем, дальше работаем с элементами хвоста:
 flatten([[]|T])->

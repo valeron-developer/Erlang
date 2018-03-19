@@ -3,6 +3,16 @@
 -module(bs02).
 -export([words/1]).
 
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+words_test_() ->
+[?_assert(words(<<"I can do this">>) == [<<"I">>, <<"can">>, <<"do">>, <<"this">>]),
+?_assert(words(<<"   I like this game">>) == [<<"I">>, <<"like">>, <<"this">>, <<"game">>]),
+?_assertNot(words(<<"Wonderful world">>) == [<<"world">>]),
+?_assertMatch([<<"Erlang">>, <<"in">>, <<"the">>, <<"future">>], words(<<"Erlang in the future">>)),
+?_assertEqual(words(<<"Erlang in the future">>), words(<<"Erlang in the future">>))].
+-endif.
 
 % создаем два аккумулятора, для того что-бы в 1-й записывать слова без пробела, а во второй - список слов состоящий из 1-го аккумулятора:
 words(Bin) ->

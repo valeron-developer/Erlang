@@ -2,7 +2,17 @@
 
 -module(p06).
 -export([is_palindrome/1]).
- 
+
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+is_palindrome_test_() ->
+[?_assert(is_palindrome([0,4,1,4,0]) == true),
+?_assert(is_palindrome([3,t]) == false),
+?_assertNot(is_palindrome([a,b,c]) == true),
+?_assertMatch(true, is_palindrome([8,d,2,d,8])),
+?_assertEqual(is_palindrome([a,b,c,d]), is_palindrome([a,b,c,d]))].
+-endif.
 
 % создаем функцию, которая проверяет на равенство между собой вводимый список, и тот же список только перевернутый, я поставил равенство по типу(=:=) что-бы избежать чисел с плавающей точкой, которые могут быть равны целым числам:
 is_palindrome(List) -> List =:= reverse(List).

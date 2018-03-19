@@ -3,6 +3,17 @@
 -module(p02).
 -export([but_last/1]).
 
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+but_last_test_() ->
+[?_assert(but_last([0,c,t]) == [c,t]),
+?_assert(but_last([a]) == underfined),
+?_assertNot(but_last([7,2,1]) == [2,2]),
+?_assertMatch([8,0], but_last([1,2,3,8,0])),
+?_assertEqual(but_last([5,6,3,8]), but_last([1,2,3,8]))].
+-endif.
+
 % если в списке один элемент - выводим underfined, так как нам нужно 2 элемента:
 but_last([_|[]]) ->       
     underfined;           

@@ -3,6 +3,16 @@
 -module(p04).
 -export([len/1]).
 
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+len_test_() ->
+[?_assert(len([0,4,1]) == 3),
+?_assert(len([3]) == 1),
+?_assertNot(len([a,b,c]) == 8),
+?_assertMatch(4, len([s,2,d,8])),
+?_assertEqual(len([a,b,c,d]), len([1,2,3,4]))].
+-endif.
 
 % если список пуст - выводим цифру "0":
 len([]) ->        

@@ -7,12 +7,11 @@
 -ifdef(TEST).
 -include_lib("eunit/include/eunit.hrl").
 last_test_() ->
-[?_assert(last([0,1]) == 1),
-?_assert(last([a,b,c,d,e,f]) == f),
-?_assertNot(last([2,1]) == 1),
+[?_assert(last([0,4,1]) == 1),
 ?_assert(last([3]) == 3),
-?_assert(last([4,1,5]) == 5),
-?_assert(last([5,6,7,8]) == 8)].
+?_assertNot(last([7,2,1]) == 4),
+?_assertMatch(8, last([1,2,3,8])),
+?_assertEqual(last([5,6,7,8]), last([1,2,3,8]))].
 -endif.
 
 % выводим элемент в списке если в списке он один:

@@ -3,6 +3,16 @@
 -module(p10).
 -export([encode/1]).
 
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+encode_test_() ->
+[?_assert(encode([a,b,b,c,d,d,e]) == [[1,a],[2,b],[1,c],[2,d],[1,e]]),
+?_assertNot(encode([a,a,b,c,c,d]) == [[1,a],[1,b],[2,c],[1,d]]),
+?_assertMatch([[1,s],[2,f],[2,e]], encode([s,f,f,e,e])),
+?_assertEqual(encode([[3,a],[2,b],[1,c],[2,d]]), encode([[3,a],[2,b],[1,c],[2,d]])),
+?_assertExit(normal, exit(normal))].
+-endif.
 
 % создаем функцию, в которой 1-й элемент списка будет равен числу последующих повторяющихся подряд элементов, который будет добавлять 1-цу при данных условиях:
 encode([[Count,Elem]|[Elem|[]]])->

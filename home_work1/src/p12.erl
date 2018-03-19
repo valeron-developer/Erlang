@@ -3,6 +3,16 @@
 -module(p12).
 -export([decode_modified/1]).
 
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+decode_modified_test_() ->
+[?_assert(decode_modified([[4,a],[2,b],c,[2,d],e]) == [a,a,a,a,b,b,c,d,d,e]),
+?_assertNot(decode_modified([[2,a],b,[2,c],d]) == [a,a,b,c,c,d,d]),
+?_assertMatch([a,a,a,a,b,c,c,a,a,d,e,e,e,e], decode_modified([[4,a],b,[2,c],[2,a],d,[4,e]])),
+?_assertExit(normal, exit(normal)),
+?_assertException(error, {bad_argument,_}, error({bad_argument,<<>>}))].
+-endif.
 
 % если список состоит из одного вложенного списка в котором голова = 2, а хвост равен одному элементу, то выводим этот элемент в списке 2 раза:
 decode_modified([[2,X]|[]])->

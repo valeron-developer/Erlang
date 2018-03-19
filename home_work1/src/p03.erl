@@ -3,6 +3,16 @@
 -module(p03).
 -export([element_at/2]).
 
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+element_at_test_() ->
+[?_assert(element_at([0,4,1], 2) == 4),
+?_assert(element_at([3], 1) == 3),
+?_assertNot(element_at([a,b,c], 2) == c),
+?_assertMatch(m, element_at([1,2,m,8], 3)),
+?_assertEqual(element_at([5,6,7,8], 4), element_at([1,8,3,1], 2))].
+-endif.
 
 % присваиваем к голове списка цифру 1, хвост списка нас не интересует:
 element_at([H|_], 1) ->  

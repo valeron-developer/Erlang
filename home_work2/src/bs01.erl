@@ -2,6 +2,16 @@
 
 -export([first_word/1]).
 
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+first_word_test_() ->
+[?_assert(first_word(<<"I can do this">>) == <<"I">>),
+?_assertNot(first_word(<<"Wonderful world">>) == <<"world">>),
+?_assertMatch(<<"Erlang">>, first_word(<<"Erlang in the future">>)),
+?_assertEqual(first_word(<<"Erlang in the future">>), first_word(<<"Erlang the best">>)),
+?_assertException(error, {bad_argument,_}, error({bad_argument,<<"/">>}))].
+-endif.
 
 % создаем аккумулятор, для накопления бинарных данных:
 first_word(Bin) ->

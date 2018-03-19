@@ -3,6 +3,17 @@
 -module(p09).
 -export([pack/1]).
 
+% тесты для данного задания
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+pack_test_() ->
+[?_assertNot(pack([1,2,3,4,5]) == [[1,1],[2],[3],[4],[5]]),
+?_assert(pack([1,2,2,3,4,4,5]) == [[1],[2,2],[3],[4,4],[5]]),
+?_assert(pack([a,b,b,c,d,d,e]) == [[a],[b,b],[c],[d,d],[e]]),
+?_assertNot(pack([a,a,b,c,c,d]) == [[a,a],b,[c,c],[d]]),
+?_assertEqual(pack([[a,a],[b,b],[c],[d,d]]), pack([[a,a],[b,b],[c],[d,d]]))].
+-endif.
+
 % если в списке только один элемент, то выводим его, помещая в новый список []:
 pack([H|[]])->
    [H];
