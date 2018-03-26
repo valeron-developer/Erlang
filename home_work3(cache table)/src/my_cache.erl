@@ -14,7 +14,6 @@ insert(Key, Value, Timer) when is_integer(Timer), Timer > 0 ->
 	ets:insert(new_table, {Key, Value, TimeOut}), ok.
 
 % функция, которая выводит значение по ключу, достает только не устаревшие данные:
-должна доставать только НЕ устаревшие данные
 lookup(Key) ->	
 	Now = ?NOW,
 	MS = ets:fun2ms(fun({KeyGen, Value, TimeOut}) 
