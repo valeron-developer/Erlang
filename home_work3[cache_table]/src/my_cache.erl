@@ -35,3 +35,15 @@ delete_obsolete() ->
 	Now = ?NOW,
 	ets:select_delete(new_table, ets:fun2ms(
 		fun({_, _, TimeOut}) when TimeOut =< Now -> true end)).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+
+create_tab(_) ->
+	Info = ets:info(new_table),
+	Create = my_cache:create(),
+	[?_assertNotEqual(undefined, Info),
+	 ?_assertEqual({error, need_create}, Create)].
+
+-endif.
